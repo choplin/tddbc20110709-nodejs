@@ -2,6 +2,8 @@ var vender = require('../lib/vender').vender;
 console.log(vender);
 var testCase = require('nodeunit').testCase;
 
+var currency = [1000, 500, 100, 50, 10];
+
 module.exports = testCase({
     setUp: function(callback){
         this.v = new vender;
@@ -101,6 +103,9 @@ module.exports = testCase({
         v.sell(1);
         v.sell(1);
         test.throws( function(){v.sell(1)} );
+        test.done();
+    }
+    ,'1000円札が5枚,効果がそれぞれ10枚入っている': function(){
         test.done();
     }
 });
