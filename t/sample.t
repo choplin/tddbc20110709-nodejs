@@ -76,6 +76,31 @@ module.exports = testCase({
         test.done();
     }
     ,'ID1を購入するとID1の在庫数が4になる': function(test){
-        this.done();
+        this.v.insert(1000);
+        this.v.sell(1);
+        test.equal(this.v.getStock(1).stock, 4);
+        test.done();
+    }
+    ,'ID1を3回購入すると売上が360円になる': function(test){
+        this.v.insert(1000);
+        this.v.sell(1);
+        this.v.sell(1);
+        this.v.sell(1);
+        test.equal(this.v.getTotalAmount(), 360);
+        test.done();
+    }
+    ,'現在の在庫数が算出される': function(test){
+        test.done();
+    }
+    ,'ID1を6回購入すると在庫切れで例外が発生する': function(test){
+        var v = this.v;
+        v.insert(1000);
+        v.sell(1);
+        v.sell(1);
+        v.sell(1);
+        v.sell(1);
+        v.sell(1);
+        test.throws( function(){v.sell(1)} );
+        test.done();
     }
 });
