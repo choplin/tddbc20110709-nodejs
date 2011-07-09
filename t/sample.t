@@ -1,31 +1,5 @@
-var vender = function(){
-    this.current = 0;
-};
-
-vender.prototype = {
-    insert : function(money){
-        if (money == 1 || money == 5){
-            throw new Error;
-        }
-        this.current = this.current + money;
-    }
-    ,getCount : function(){
-        return this.current;
-    }
-    ,getStock : function(id){
-        return {
-            "name": "cola"
-            ,"stock": 5
-            ,"price": 120
-        };
-    }
-    ,getAvailable : function(){
-        return [1];
-    }
-};
-
-
-
+var vender = require('../lib/vender').vender;
+console.log(vender);
 var testCase = require('nodeunit').testCase;
 
 module.exports = testCase({
@@ -64,6 +38,16 @@ module.exports = testCase({
     ,'お金を投入して購入できるIDの一覧を取得できる': function(test){
         this.v.insert(1000);
         test.deepEqual(this.v.getAvailable(), [1]);
+        test.done();
+    }
+
+    ,'ID2の在庫を問い合わせるとレッドブル5本200円のオブジェクトが返ってくる': function(test){
+        test.deepEqual(this.v.getStock(2), {
+                "name": "redbull"
+                ,"stock": 5
+                ,"price": 200
+            }
+        );
         test.done();
     }
 });
