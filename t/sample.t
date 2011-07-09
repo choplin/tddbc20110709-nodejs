@@ -2,24 +2,29 @@ var vender = function(){
     this.current = 0;
 };
 
-vender.prototype.insert = function(money){
-    if (money == 1 || money == 5){
-        throw new Error;
+vender.prototype = {
+    insert : function(money){
+        if (money == 1 || money == 5){
+            throw new Error;
+        }
+        this.current = this.current + money;
     }
-    this.current = this.current + money;
+    ,getCount : function(){
+        return this.current;
+    }
+    ,getStock : function(id){
+        return {
+            "name": "cola"
+            ,"stock": 5
+            ,"price": 120
+        };
+    }
+    ,getAvailable : function(){
+        return [1];
+    }
 };
 
-vender.prototype.getCount = function(){
-    return this.current;
-}
 
-vender.prototype.getStock = function(id){
-    return {
-        "name": "cola"
-        ,"stock": 5
-        ,"price": 120
-    };
-}
 
 var testCase = require('nodeunit').testCase;
 
@@ -57,6 +62,8 @@ module.exports = testCase({
     }
 
     ,'お金を投入して購入できるIDの一覧を取得できる': function(test){
+        this.v.insert(1000);
+        test.deepEqual(this.v.getAvailable(), [1]);
         test.done();
     }
 });
