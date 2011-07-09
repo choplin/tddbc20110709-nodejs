@@ -34,3 +34,7 @@ exports['1000円と500円を投入すると1500円になる'] = function(test){
     test.equal(v.getCount(), 1500, "合計額が1500円");
     test.done();
 };
+
+exports['ID1の在庫を問い合わせるとコーラ5本120円のオブジェクトが返ってくる'] = function(test){
+    test.done();
+}
