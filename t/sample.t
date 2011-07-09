@@ -48,6 +48,8 @@ module.exports = testCase({
             ,"price": 200
         };
         this.v.addStock(2, stock);
+        this.v.insert(1000);
+        test.deepEqual(this.v.getAvailable(), [1,2]);
         test.deepEqual(this.v.getStock(2), {
                 "name": "redbull"
                 ,"stock": 5
@@ -63,6 +65,8 @@ module.exports = testCase({
             ,"price": 100
         };
         this.v.addStock(3, stock);
+        this.v.insert(1000);
+        test.deepEqual(this.v.getAvailable(), [1,3]);
         test.deepEqual(this.v.getStock(3), {
                 "name": "water"
                 ,"stock": 5
@@ -70,5 +74,8 @@ module.exports = testCase({
             }
         );
         test.done();
+    }
+    ,'ID1を購入するとID1の在庫数が4になる': function(test){
+        this.done();
     }
 });
