@@ -54,3 +54,7 @@ exports['ID1の在庫を問い合わせるとコーラ5本120円のオブジェ�
     );
     test.done();
 }
+
+exports['お金を投入して購入できるIDの一覧を取得できる'] = function(test){
+    test.done();
+}
