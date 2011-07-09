@@ -21,40 +21,42 @@ vender.prototype.getStock = function(id){
     };
 }
 
-exports['お金を入れる'] = function (test) {
-    //test.expect(2);
+var testCase = require('nodeunit').testCase;
 
-    var v = new vender;
+module.exports = testCase({
+    setUp: function(callback){
+        this.v = new vender;
+        callback();
+    }
+    ,tearDown: function(callback){
+        callback();
+    }
+    ,'お金を入れる' : function (test) {
+        this.v.insert(1000);
+        test.equal(this.v.getCount(), 1000, "insert 1000yen");
 
-    v.insert(1000);
-    test.equal(v.getCount(), 1000, "insert 1000yen");
+        test.throws(function(){this.v.insert(1)});
 
-    test.throws(function(){v.insert(1)});
+        test.done();
+    }
+    ,'1000円と500円を投入すると1500円になる': function(test){
+        this.v.insert(1000);
+        this.v.insert(500);
+        test.equal(this.v.getCount(), 1500, "合計額が1500円");
+        test.done();
+    }
 
-    test.done();
-};
+    ,'ID1の在庫を問い合わせるとコーラ5本120円のオブジェクトが返ってくる': function(test){
+        test.deepEqual(this.v.getStock(1), {
+                "name": "cola"
+                ,"stock": 5
+                ,"price": 120
+            }
+        );
+        test.done();
+    }
 
-exports['1000円と500円を投入すると1500円になる'] = function(test){
-    var v = new vender;
-
-    v.insert(1000);
-    v.insert(500);
-    test.equal(v.getCount(), 1500, "合計額が1500円");
-    test.done();
-};
-
-exports['ID1の在庫を問い合わせるとコーラ5本120円のオブジェクトが返ってくる'] = function(test){
-    var v = new vender;
-
-    test.deepEqual(v.getStock(1), {
-            "name": "cola"
-            ,"stock": 5
-            ,"price": 120
-        }
-    );
-    test.done();
-}
-
-exports['お金を投入して購入できるIDの一覧を取得できる'] = function(test){
-    test.done();
-}
+    ,'お金を投入して購入できるIDの一覧を取得できる': function(test){
+        test.done();
+    }
+});
