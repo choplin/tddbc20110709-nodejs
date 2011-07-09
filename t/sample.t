@@ -13,6 +13,14 @@ vender.prototype.getCount = function(){
     return this.current;
 }
 
+vender.prototype.getStock = function(id){
+    return {
+        "name": "cola"
+        ,"stock": 5
+        ,"price": 120
+    };
+}
+
 exports['お金を入れる'] = function (test) {
     //test.expect(2);
 
@@ -36,5 +44,13 @@ exports['1000円と500円を投入すると1500円になる'] = function(test){
 };
 
 exports['ID1の在庫を問い合わせるとコーラ5本120円のオブジェクトが返ってくる'] = function(test){
+    var v = new vender;
+
+    test.deepEqual(v.getStock(1), {
+            "name": "cola"
+            ,"stock": 5
+            ,"price": 120
+        }
+    );
     test.done();
 }
