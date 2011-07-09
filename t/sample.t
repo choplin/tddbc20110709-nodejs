@@ -41,11 +41,32 @@ module.exports = testCase({
         test.done();
     }
 
-    ,'ID2の在庫を問い合わせるとレッドブル5本200円のオブジェクトが返ってくる': function(test){
+    ,'ID2レッドブル5本200円の在庫を追加できる': function(test){
+        var stock = {
+            "name": "redbull"
+            ,"stock": 5
+            ,"price": 200
+        };
+        this.v.addStock(2, stock);
         test.deepEqual(this.v.getStock(2), {
                 "name": "redbull"
                 ,"stock": 5
                 ,"price": 200
+            }
+        );
+        test.done();
+    }
+    ,'ID3水5本100円の在庫を追加できる': function(test){
+        var stock = {
+            "name": "water"
+            ,"stock": 5
+            ,"price": 100
+        };
+        this.v.addStock(3, stock);
+        test.deepEqual(this.v.getStock(3), {
+                "name": "water"
+                ,"stock": 5
+                ,"price": 100
             }
         );
         test.done();
